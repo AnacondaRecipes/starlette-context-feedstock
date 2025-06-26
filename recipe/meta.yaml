@@ -21,7 +21,7 @@ requirements:
     - poetry-core
   run:
     - python
-    - starlette
+    - starlette >=0.27.0
 
 test:
   imports:
