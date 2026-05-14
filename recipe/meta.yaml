@@ -10,9 +10,9 @@ source:
   sha256: f6025753f8ede041778b2f2c3823e2da9df3c2d94832575bcb59374216b7c2b2
 
 build:
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [py<310]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -24,12 +24,12 @@ requirements:
     - starlette >=0.27.0
 
 test:
+  requires:
+    - pip
   imports:
     - starlette_context
   commands:
     - pip check
-  requires:
-    - pip
 
 about:
   home: https://github.com/tomwojcik/starlette-context
