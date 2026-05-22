@@ -1,35 +1,35 @@
 {% set name = "starlette-context" %}
-{% set version = "0.4.0" %}
+{% set version = "0.5.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/starlette_context-{{ version }}.tar.gz
-  sha256: 3242417c9354c067a4ac5009aff762dc0b322074216f664825d5d127108553be
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: f6025753f8ede041778b2f2c3823e2da9df3c2d94832575bcb59374216b7c2b2
 
 build:
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [py<310]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python
     - pip
-    - poetry-core
+    - hatchling
   run:
     - python
     - starlette >=0.27.0
 
 test:
+  requires:
+    - pip
   imports:
     - starlette_context
   commands:
     - pip check
-  requires:
-    - pip
 
 about:
   home: https://github.com/tomwojcik/starlette-context
